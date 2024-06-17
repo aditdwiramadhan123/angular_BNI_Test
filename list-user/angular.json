@@ -1,0 +1,199 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "list-user": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/list-user",
+      "sourceRoot": "projects/list-user/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/list-user",
+            "index": "projects/list-user/src/index.html",
+            "main": "projects/list-user/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/list-user/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/list-user/src/favicon.ico",
+              "projects/list-user/src/assets"
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/list-user/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            },
+            "scripts": [],
+            "extraWebpackConfig": "projects/list-user/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js",
+              "fileReplacements": [
+                {
+                  "replace": "projects/list-user/src/environments/environment.ts",
+                  "with": "projects/list-user/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/list-user/src/environments/environment.ts",
+                  "with": "projects/list-user/src/environments/environment.ts"
+                }
+              ]
+            },
+            "sit": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js",
+              "fileReplacements": [
+                {
+                  "replace": "projects/list-user/src/environments/environment.ts",
+                  "with": "projects/list-user/src/environments/environment.sit.ts"
+                }
+              ]
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js",
+              "fileReplacements": [
+                {
+                  "replace": "projects/list-user/src/environments/environment.ts",
+                  "with": "projects/list-user/src/environments/environment.uat.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "list-user:build:production",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "list-user:build:development"
+            },
+            "sit": {
+              "browserTarget": "list-user:build:sit",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js"
+            },
+            "uat": {
+              "browserTarget": "list-user:build:uat",
+              "extraWebpackConfig": "projects/list-user/webpack.prod.config.js"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4202,
+            "publicHost": "http://localhost:4202",
+            "extraWebpackConfig": "projects/list-user/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "list-user:build",
+            "extraWebpackConfig": "projects/list-user/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/list-user/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/list-user/src/favicon.ico",
+              "projects/list-user/src/assets"
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/list-user/src/styles.scss"
+            ],
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
+            "karmaConfig": "projects/list-user/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/list-user/**/*.ts",
+              "projects/list-user/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": "b6b1ca9a-096c-4472-9cbc-6b8726d19a7c"
+  }
+}
